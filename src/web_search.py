@@ -40,6 +40,5 @@ def web_agent(question: str) -> tuple:
     max_score = float(max(scores))
     confidence_score = min(max_score / 2.0, 0.95)
     
-    # We prefix to indicate it's from the web
     answer = f"[Web Search Result]: {best_snippet}"
     return answer, round(confidence_score, 2)

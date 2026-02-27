@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import os
 import json
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,14 +26,11 @@ auth = firebase.auth()
 if os.path.exists("firebase_key.json"):
     cred = credentials.Certificate("firebase_key.json")
 else:
-    # Use environment variable for Streamlit Cloud secrets
-    firebase_secret = os.getenv("FIREBASE_SERVICE_ACCOUNT")
-    if firebase_secret:
-        # Load the dict directly from the JSON string
-        cred_dict = json.loads(firebase_secret)
+    try:
+        cred_dict = dict(st.secrets["firebase_credentials"])
         cred = credentials.Certificate(cred_dict)
-    else:
-        raise ValueError("Firebase credentials not found! Ensure FIREBASE_SERVICE_ACCOUNT is set in your Cloud Secrets.")
+    except Exception as e:
+        raise ValueError(f"Firebase credentials not found! Ensure 'firebase_credentials' is set in your Cloud Secrets. Error: {e}")
 
 try:
     firebase_admin.get_app()  # Check if already initialized

@@ -12,7 +12,9 @@ chromadb
 python-dotenv
 opencv-python
 groq
-pyrebase4
+Pyrebase4==4.7.1
+setuptools==70.0.0
+pycryptodome
 firebase-admin
 pytesseract
 pdf2image
@@ -23,3 +25,4 @@ requests
 google-search-results
 sentence-transformers
 huggingface-hub
+rank_bm25
