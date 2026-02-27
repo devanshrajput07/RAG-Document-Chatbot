@@ -1,0 +1,6 @@
+.env
+firebase_key.json
+venv/
+__pycache__/
+chroma_db/
+.DS_Store
